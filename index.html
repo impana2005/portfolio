@@ -30,6 +30,9 @@
 
 /* ===== GLOBAL ===== */
 *{margin:0;padding:0;box-sizing:border-box;}
+html{
+  scroll-behavior:smooth;
+}
 body{
   font-family:"Poppins",sans-serif;
   background:var(--bg);
@@ -47,16 +50,36 @@ nav{
   position:sticky;
   top:0;
   backdrop-filter:blur(14px);
-  background:rgba(0,0,0,0.2);
+  background:rgba(0,0,0,0.35);
   z-index:999;
+}
+nav .logo{
+  letter-spacing:0.5px;
 }
 nav a{
   color:var(--text);
   text-decoration:none;
   margin-left:26px;
   transition:0.3s;
+  position:relative;
+  font-size:14px;
 }
-nav a:hover{ color:var(--accent); }
+nav a::after{
+  content:"";
+  position:absolute;
+  left:0;
+  bottom:-4px;
+  width:0;
+  height:2px;
+  background:var(--accent);
+  transition:0.3s;
+}
+nav a:hover{
+  color:var(--accent);
+}
+nav a:hover::after{
+  width:100%;
+}
 
 .toggle{
   cursor:pointer;
@@ -66,25 +89,64 @@ nav a:hover{ color:var(--accent); }
   background:var(--glass);
 }
 
+/* ===== SECTIONS ===== */
+section{
+  padding:90px 50px;
+}
+section h2{
+  font-size:28px;
+  margin-bottom:16px;
+}
+
 /* ===== HERO ===== */
-section{padding:100px 50px;}
 .hero{
   display:flex;
   gap:50px;
   align-items:center;
   flex-wrap:wrap;
 }
-.hero h1{ font-size:48px; }
-.hero p{ font-size:18px; margin-top:10px; }
+.hero h1{
+  font-size:44px;
+  line-height:1.2;
+}
+.hero p{
+  font-size:16px;
+  margin-top:10px;
+  opacity:0.9;
+}
+
+/* hero badges */
+.hero-badges{
+  display:flex;
+  flex-wrap:wrap;
+  gap:10px;
+  margin-top:18px;
+}
+.badge{
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  padding:8px 14px;
+  border-radius:999px;
+  background:var(--glass);
+  font-size:13px;
+  backdrop-filter:blur(18px);
+}
+.badge.secondary{
+  opacity:0.85;
+}
+.badge i{
+  font-size:14px;
+}
 
 .hero img{
-  width:200px; /* smaller profile photo */
+  width:220px;
   border-radius:20px;
   box-shadow:0 8px 32px rgba(0,0,0,0.6);
   transition:0.4s;
 }
 .hero img:hover{
-  transform:scale(1.05);
+  transform:scale(1.05) translateY(-4px);
   box-shadow:0 0 30px var(--accent);
 }
 
@@ -93,19 +155,102 @@ section{padding:100px 50px;}
   background:linear-gradient(45deg,var(--accent),#6366f1);
   padding:14px 30px;
   border-radius:15px;
-  margin-top:28px;
+  margin-top:24px;
   color:white;
   text-decoration:none;
   font-weight:600;
   transition:0.3s;
+  font-size:14px;
 }
-.btn:hover{ transform:scale(1.08); }
+.btn:hover{
+  transform:scale(1.06) translateY(-1px);
+}
+
+/* ===== EDUCATION ===== */
+.edu-grid{
+  display:grid;
+  grid-template-columns:minmax(0,2fr) minmax(0,1.5fr);
+  gap:24px;
+  margin-top:18px;
+}
+.edu-card{
+  background:var(--glass);
+  backdrop-filter:blur(20px);
+  padding:22px 20px;
+  border-radius:18px;
+  box-shadow:0 10px 30px rgba(0,0,0,0.35);
+  border:1px solid rgba(148,163,184,0.35);
+  transition:0.35s;
+}
+.edu-card:hover{
+  transform:translateY(-6px);
+  box-shadow:0 0 24px rgba(56,189,248,0.6);
+}
+.edu-main-title{
+  display:flex;
+  align-items:center;
+  gap:12px;
+}
+.edu-main-title i{
+  font-size:24px;
+  color:var(--accent);
+}
+.edu-card h3{
+  font-size:20px;
+}
+.edu-meta{
+  font-size:14px;
+  margin-top:6px;
+  opacity:0.9;
+}
+.edu-tags{
+  display:flex;
+  flex-wrap:wrap;
+  gap:8px;
+  margin-top:12px;
+}
+.tag{
+  font-size:12px;
+  padding:6px 10px;
+  border-radius:999px;
+  border:1px solid rgba(148,163,184,0.6);
+  opacity:0.9;
+}
+.edu-stats{
+  display:flex;
+  flex-wrap:wrap;
+  gap:10px;
+  margin-top:14px;
+}
+.stat-chip{
+  font-size:12px;
+  padding:6px 10px;
+  border-radius:10px;
+  background:rgba(15,23,42,0.4);
+}
+
+/* ===== ACHIEVEMENTS ===== */
+.ach-list{
+  margin-top:15px;
+  list-style:none;
+}
+.ach-list li{
+  margin-bottom:10px;
+  font-size:14px;
+  display:flex;
+  align-items:flex-start;
+  gap:8px;
+}
+.ach-list span.emoji{
+  margin-top:2px;
+}
 
 /* ===== PROJECTS WITH MODAL ===== */
 .projects{
   display:grid;
   grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
   gap:30px;
+  margin-top:16px;
 }
 .card{
   background:var(--glass);
@@ -113,11 +258,20 @@ section{padding:100px 50px;}
   padding:24px;
   border-radius:18px;
   cursor:pointer;
-  transition:0.4s;
+  transition:0.35s;
+  border:1px solid transparent;
+}
+.card h3{
+  margin-bottom:6px;
+}
+.card small{
+  font-size:12px;
+  opacity:0.7;
 }
 .card:hover{
   transform:translateY(-8px);
   box-shadow:0 0 20px var(--accent);
+  border-color:rgba(148,163,184,0.6);
 }
 
 /* ===== MODAL ===== */
@@ -140,7 +294,7 @@ section{padding:100px 50px;}
   max-width:500px;
 }
 .modal h3{margin-bottom:10px;}
-.modal p{line-height:1.6;margin-bottom:20px;}
+.modal p{line-height:1.6;margin-bottom:20px;font-size:14px;}
 .close{
   float:right;
   font-size:22px;
@@ -150,12 +304,16 @@ section{padding:100px 50px;}
 
 /* ===== SKILLS BARS ===== */
 .skill-box{
-  margin-top:20px;
+  margin-top:18px;
 }
-.skill-title{ font-weight:600; margin-bottom:6px; }
+.skill-title{
+  font-weight:600;
+  margin-bottom:6px;
+  font-size:14px;
+}
 .bar{
   width:100%;
-  background:rgba(255,255,255,0.1);
+  background:rgba(255,255,255,0.08);
   border-radius:10px;
   overflow:hidden;
 }
@@ -173,17 +331,50 @@ section{padding:100px 50px;}
   backdrop-filter:blur(20px);
   padding:30px;
   border-radius:18px;
-  width:350px;
+  max-width:360px;
+  border:1px solid rgba(148,163,184,0.4);
+  font-size:14px;
+}
+.contact-box p + p{
+  margin-top:6px;
+}
+
+/* ===== REVEAL ANIMATION ===== */
+.reveal{
+  opacity:0;
+  transform:translateY(24px);
+  transition:0.7s ease;
+}
+.reveal.show{
+  opacity:1;
+  transform:translateY(0);
 }
 
 /* ===== FOOTER ===== */
 footer{
   text-align:center;
   padding:30px;
-  font-size:14px;
+  font-size:13px;
   color:var(--accent);
 }
 
+/* ===== RESPONSIVE ===== */
+@media (max-width:768px){
+  nav{
+    padding:14px 18px;
+    flex-wrap:wrap;
+    gap:10px;
+  }
+  section{
+    padding:70px 18px;
+  }
+  .hero h1{
+    font-size:32px;
+  }
+  .edu-grid{
+    grid-template-columns:1fr;
+  }
+}
 </style>
 </head>
 <body>
@@ -193,7 +384,9 @@ footer{
   <div class="logo" style="font-weight:700;font-size:22px;">Impana M M</div>
   <div>
     <a href="#hero">Home</a>
+    <a href="#education">Education</a>
     <a href="#projects">Projects</a>
+    <a href="#achievements">Achievements</a>
     <a href="#skills">Skills</a>
     <a href="#contact">Contact</a>
   </div>
@@ -202,38 +395,107 @@ footer{
 
 <!-- HERO -->
 <section class="hero" id="hero">
-  <div>
-    <h1>Hi 👋, I'm <span style="color:var(--accent)">Impana</span></h1>
-    <p>Currently pursuing <b>BE CSE, 3rd year</b> at <b>Malnad College of Engineering, Hassan.</b></p>
-    <p>Certifications: Diploma Completion Certificate, Internship Certificate</p>
+  <div class="reveal">
+    <div class="badge">
+      <i class="fa-solid fa-graduation-cap"></i>
+      BE in Computer Science & Engineering
+    </div>
+    <div class="hero-badges">
+      <span class="badge secondary">
+        <i class="fa-solid fa-building-columns"></i>
+        Malnad College of Engineering, Hassan
+      </span>
+      <span class="badge secondary">
+        <i class="fa-solid fa-user"></i>
+        3rd Year Student
+      </span>
+    </div>
+
+    <h1 style="margin-top:18px;">Hi 👋, I'm <span style="color:var(--accent)">Impana</span></h1>
+    <p>I’m a Computer Science engineering student who loves building clean UIs, exploring IoT, and solving problems using C, Python, Java and web technologies.</p>
+    <p style="margin-top:6px;">Certifications: Diploma Completion Certificate, Internship Certificate</p>
     <a class="btn" href="resume.pdf" download>📄 Download Resume</a>
   </div>
 
-  <img src="impana.jpg" alt="Impana">
+  <img class="reveal" src="impana.jpg" alt="Impana">
+</section>
+
+<!-- EDUCATION -->
+<section id="education">
+  <h2>Education</h2>
+  <p style="opacity:0.85;font-size:14px;">My current major and academic journey.</p>
+
+  <div class="edu-grid">
+    <!-- Main BE card -->
+    <div class="edu-card reveal">
+      <div class="edu-main-title">
+        <i class="fa-solid fa-graduation-cap"></i>
+        <div>
+          <h3>BE in Computer Science & Engineering</h3>
+          <p class="edu-meta"><b>Malnad College of Engineering, Hassan</b> — 3rd Year</p>
+        </div>
+      </div>
+
+      <div class="edu-tags">
+        <span class="tag">Core Subjects: DSA, OOP, OS, DBMS</span>
+        <span class="tag">Interested in: Web Dev & IoT</span>
+      </div>
+
+      <div class="edu-stats">
+        <span class="stat-chip"><i class="fa-solid fa-laptop-code"></i> Project-based learning</span>
+        <span class="stat-chip"><i class="fa-solid fa-users"></i> Active in academic activities</span>
+      </div>
+    </div>
+
+    <!-- Diploma card -->
+    <div class="edu-card reveal">
+      <h3>Diploma in Computer Science & Engineering</h3>
+      <p class="edu-meta">Completed with Diploma Completion Certificate.</p>
+      <div class="edu-tags">
+        <span class="tag">Strong CS fundamentals</span>
+        <span class="tag">Hands-on programming practice</span>
+      </div>
+    </div>
+  </div>
 </section>
 
 <!-- PROJECTS -->
 <section id="projects">
   <h2>Projects</h2>
+  <p style="opacity:0.85;font-size:14px;">Some of the work I’ve done during my engineering journey.</p>
 
   <div class="projects">
 
-    <div class="card" onclick="openModal(1)">
+    <div class="card reveal" onclick="openModal(1)">
+      <small><i class="fa-solid fa-microchip"></i> IoT • ESP32</small>
       <h3>IoT Lost Item Tracker</h3>
-      <p>ESP32 + Bluetooth app</p>
+      <p>Bluetooth-based tracker using ESP32 and a mobile app to find misplaced objects with proximity alerts.</p>
     </div>
 
-    <div class="card" onclick="openModal(2)">
+    <div class="card reveal" onclick="openModal(2)">
+      <small><i class="fa-solid fa-globe"></i> Web • HTML / CSS / JS</small>
       <h3>Portfolio Website</h3>
-      <p>Creative UI + animations</p>
+      <p>Responsive personal portfolio with glassmorphism UI, dark/light toggle and interactive animations.</p>
     </div>
 
-    <div class="card" onclick="openModal(3)">
-      <h3>Mini Java Apps</h3>
-      <p>Console programs</p>
+    <div class="card reveal" onclick="openModal(3)">
+      <small><i class="fa-solid fa-code"></i> Java • Console</small>
+      <h3>Mini Java Applications</h3>
+      <p>Console-based Java programs focusing on data structures, file handling and problem solving.</p>
     </div>
 
   </div>
+</section>
+
+<!-- ACHIEVEMENTS -->
+<section id="achievements">
+  <h2>Achievements & Certificates</h2>
+  <ul class="ach-list reveal">
+    <li><span class="emoji">🎓</span> <span>Diploma Completion Certificate in Computer Science & Engineering</span></li>
+    <li><span class="emoji">🏅</span> <span>Performance Certificate at Aisha Foundation</span></li>
+    <li><span class="emoji">💻</span> <span>Participation in coding and technical events/workshops as an engineering student</span></li>
+    <li><span class="emoji">🤝</span> <span>Volunteering and contribution in college technical & cultural activities</span></li>
+  </ul>
 </section>
 
 <!-- MODAL POPUPS -->
@@ -241,7 +503,7 @@ footer{
   <div class="modal">
     <span class="close" onclick="closeModal(1)">✖</span>
     <h3>IoT Lost Item Tracker</h3>
-    <p>ESP32 + Bluetooth + mobile app to find missing objects using scanning and proximity alerts.</p>
+    <p>Built using ESP32 and Bluetooth, this project helps track lost items using a companion mobile app. It scans nearby devices, shows proximity, and alerts the user as they move closer or farther from the object.</p>
   </div>
 </div>
 
@@ -249,7 +511,7 @@ footer{
   <div class="modal">
     <span class="close" onclick="closeModal(2)">✖</span>
     <h3>Portfolio Website</h3>
-    <p>Creative personal website built using HTML, CSS and JavaScript with modern glass UI.</p>
+    <p>A modern portfolio built with HTML, CSS and JavaScript. Features dark/light mode toggle, glassmorphism cards, smooth scroll, and interactive sections to showcase education, projects, skills and achievements.</p>
   </div>
 </div>
 
@@ -257,7 +519,7 @@ footer{
   <div class="modal">
     <span class="close" onclick="closeModal(3)">✖</span>
     <h3>Mini Java Applications</h3>
-    <p>Java console apps for data structures, file handling and basic problem solving.</p>
+    <p>Collection of Java console programs including basic data structures, file I/O operations and problem solving exercises, helping strengthen core programming logic.</p>
   </div>
 </div>
 
@@ -265,22 +527,22 @@ footer{
 <section id="skills">
   <h2>Skills</h2>
 
-  <div class="skill-box">
+  <div class="skill-box reveal">
     <div class="skill-title">C Programming</div>
     <div class="bar"><div class="progress" data-value="85"></div></div>
   </div>
 
-  <div class="skill-box">
+  <div class="skill-box reveal">
     <div class="skill-title">Python</div>
     <div class="bar"><div class="progress" data-value="75"></div></div>
   </div>
 
-  <div class="skill-box">
+  <div class="skill-box reveal">
     <div class="skill-title">Java</div>
     <div class="bar"><div class="progress" data-value="65"></div></div>
   </div>
 
-  <div class="skill-box">
+  <div class="skill-box reveal">
     <div class="skill-title">HTML / CSS / JS</div>
     <div class="bar"><div class="progress" data-value="80"></div></div>
   </div>
@@ -291,7 +553,7 @@ footer{
 <section id="contact">
   <h2>Contact</h2>
 
-  <div class="contact-box">
+  <div class="contact-box reveal">
     <p>📧 <b>impana@gmail.com</b></p>
     <p>📱 <b>+91 XXXXXXXXXX</b></p>
     <p>📍 Hassan, Karnataka</p>
@@ -331,8 +593,21 @@ toggle.onclick = ()=>{
     : `<i class="fa-solid fa-moon"></i>`;
 };
 
+/* ===== REVEAL ON SCROLL ===== */
+const revealEls = document.querySelectorAll(".reveal");
+function handleReveal(){
+  const triggerBottom = window.innerHeight - 80;
+  revealEls.forEach(el=>{
+    const rectTop = el.getBoundingClientRect().top;
+    if(rectTop < triggerBottom){
+      el.classList.add("show");
+    }
+  });
+}
+window.addEventListener("scroll", handleReveal);
+handleReveal();
+
 </script>
 
 </body>
 </html>
-
