@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Impana M M — Portfolio</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<style>
+
+/* ===== VARIABLES ===== */
+:root{
+  --bg:#0f172a;
+  --glass:rgba(255,255,255,0.08);
+  --text:#f8fafc;
+  --accent:#38bdf8;
+  --card:#162033;
+}
+
+/* ===== LIGHT MODE VARIABLES ===== */
+.light{
+  --bg:#f5f7fa;
+  --glass:rgba(0,0,0,0.06);
+  --text:#1e293b;
+  --accent:#0ea5e9;
+  --card:#ffffff;
+}
+
+/* ===== GLOBAL ===== */
+*{margin:0;padding:0;box-sizing:border-box;}
+body{
+  font-family:"Poppins",sans-serif;
+  background:var(--bg);
+  color:var(--text);
+  overflow-x:hidden;
+  transition:0.4s ease;
+}
+
+/* ===== NAV ===== */
+nav{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:18px 50px;
+  position:sticky;
+  top:0;
+  backdrop-filter:blur(14px);
+  background:rgba(0,0,0,0.2);
+  z-index:999;
+}
+nav a{
+  color:var(--text);
+  text-decoration:none;
+  margin-left:26px;
+  transition:0.3s;
+}
+nav a:hover{ color:var(--accent); }
+
+.toggle{
+  cursor:pointer;
+  font-size:20px;
+  padding:8px 14px;
+  border-radius:10px;
+  background:var(--glass);
+}
+
+/* ===== HERO ===== */
+section{padding:100px 50px;}
+.hero{
+  display:flex;
+  gap:80px;
+  align-items:center;
+  flex-wrap:wrap;
+}
+.hero h1{ font-size:48px; }
+.hero p{ font-size:18px; margin-top:10px; }
+
+.hero img{
+  width:330px;
+  border-radius:20px;
+  box-shadow:0 8px 32px rgba(0,0,0,0.6);
+  transition:0.4s;
+}
+.hero img:hover{
+  transform:scale(1.05);
+  box-shadow:0 0 30px var(--accent);
+}
+
+.btn{
+  display:inline-block;
+  background:linear-gradient(45deg,var(--accent),#6366f1);
+  padding:14px 30px;
+  border-radius:15px;
+  margin-top:28px;
+  color:white;
+  text-decoration:none;
+  font-weight:600;
+  transition:0.3s;
+}
+.btn:hover{ transform:scale(1.08); }
+
+/* ===== PROJECTS WITH MODAL ===== */
+.projects{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+  gap:30px;
+}
+.card{
+  background:var(--glass);
+  backdrop-filter:blur(18px);
+  padding:24px;
+  border-radius:18px;
+  cursor:pointer;
+  transition:0.4s;
+}
+.card:hover{
+  transform:translateY(-8px);
+  box-shadow:0 0 20px var(--accent);
+}
+
+/* ===== MODAL ===== */
+.modal-bg{
+  position:fixed;
+  top:0;left:0;
+  width:100%;height:100%;
+  background:rgba(0,0,0,0.7);
+  display:none;
+  justify-content:center;
+  align-items:center;
+  padding:40px;
+  z-index:2000;
+}
+.modal{
+  background:var(--glass);
+  backdrop-filter:blur(20px);
+  padding:30px;
+  border-radius:20px;
+  max-width:500px;
+}
+.modal h3{margin-bottom:10px;}
+.modal p{line-height:1.6;margin-bottom:20px;}
+.close{
+  float:right;
+  font-size:22px;
+  cursor:pointer;
+  color:var(--accent);
+}
+
+/* ===== SKILLS BARS ===== */
+.skill-box{
+  margin-top:20px;
+}
+.skill-title{ font-weight:600; margin-bottom:6px; }
+.bar{
+  width:100%;
+  background:rgba(255,255,255,0.1);
+  border-radius:10px;
+  overflow:hidden;
+}
+.progress{
+  height:18px;
+  border-radius:10px;
+  background:linear-gradient(45deg,var(--accent),#6366f1);
+  width:0;
+  transition:1.8s ease-out;
+}
+
+/* ===== CONTACT ===== */
+.contact-box{
+  background:var(--glass);
+  backdrop-filter:blur(20px);
+  padding:30px;
+  border-radius:18px;
+  width:350px;
+}
+
+/* ===== FOOTER ===== */
+footer{
+  text-align:center;
+  padding:30px;
+  font-size:14px;
+  color:var(--accent);
+}
+
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="logo" style="font-weight:700;font-size:22px;">Impana M M</div>
+  <div>
+    <a href="#hero">Home</a>
+    <a href="#projects">Projects</a>
+    <a href="#skills">Skills</a>
+    <a href="#contact">Contact</a>
+  </div>
+  <div class="toggle" id="modeToggle"><i class="fa-solid fa-moon"></i></div>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="hero">
+  <div>
+    <h1>Hi 👋, I'm <span style="color:var(--accent)">Impana</span></h1>
+    <p>BE CSE 5th Sem student at <b>Malnad College of Engineering, Hassan.</b></p>
+
+    <a class="btn" href="resume.pdf" download>📄 Download Resume</a>
+  </div>
+
+  <img src="impana.jpg" alt="Impana">
+</section>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <h2>Projects</h2>
+
+  <div class="projects">
+
+    <div class="card" onclick="openModal(1)">
+      <h3>IoT Lost Item Tracker</h3>
+      <p>ESP32 + Bluetooth app</p>
+    </div>
+
+    <div class="card" onclick="openModal(2)">
+      <h3>Portfolio Website</h3>
+      <p>Creative UI + animations</p>
+    </div>
+
+    <div class="card" onclick="openModal(3)">
+      <h3>Mini Java Apps</h3>
+      <p>Console programs</p>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- MODAL POPUPS -->
+<div class="modal-bg" id="modal1">
+  <div class="modal">
+    <span class="close" onclick="closeModal(1)">✖</span>
+    <h3>IoT Lost Item Tracker</h3>
+    <p>ESP32 + Bluetooth + mobile app to find missing objects using scanning and proximity alerts.</p>
+  </div>
+</div>
+
+<div class="modal-bg" id="modal2">
+  <div class="modal">
+    <span class="close" onclick="closeModal(2)">✖</span>
+    <h3>Portfolio Website</h3>
+    <p>Creative personal website built using HTML, CSS and JavaScript with modern glass UI.</p>
+  </div>
+</div>
+
+<div class="modal-bg" id="modal3">
+  <div class="modal">
+    <span class="close" onclick="closeModal(3)">✖</span>
+    <h3>Mini Java Applications</h3>
+    <p>Java console apps for data structures, file handling and basic problem solving.</p>
+  </div>
+</div>
+
+
+<!-- SKILLS -->
+<section id="skills">
+  <h2>Skills</h2>
+
+  <div class="skill-box">
+    <div class="skill-title">C Programming</div>
+    <div class="bar"><div class="progress" data-value="85"></div></div>
+  </div>
+
+  <div class="skill-box">
+    <div class="skill-title">Python</div>
+    <div class="bar"><div class="progress" data-value="75"></div></div>
+  </div>
+
+  <div class="skill-box">
+    <div class="skill-title">Java</div>
+    <div class="bar"><div class="progress" data-value="65"></div></div>
+  </div>
+
+  <div class="skill-box">
+    <div class="skill-title">HTML / CSS / JS</div>
+    <div class="bar"><div class="progress" data-value="80"></div></div>
+  </div>
+
+</section>
+
+
+<!-- CONTACT -->
+<section id="contact">
+  <h2>Contact</h2>
+
+  <div class="contact-box">
+    <p>📧 <b>impana@gmail.com</b></p>
+    <p>📱 <b>+91 XXXXXXXXXX</b></p>
+    <p>📍 Hassan, Karnataka</p>
+  </div>
+</section>
+
+
+<footer>© 2025 — Impana M M</footer>
+
+
+
+<script>
+
+/* ===== MODAL FUNCTION ===== */
+function openModal(id){
+  document.getElementById("modal"+id).style.display="flex";
+}
+function closeModal(id){
+  document.getElementById("modal"+id).style.display="none";
+}
+
+/* ===== ANIMATED SKILLS ===== */
+const bars = document.querySelectorAll(".progress");
+window.addEventListener("scroll",()=>{
+  bars.forEach(bar=>{
+    let value = bar.dataset.value;
+    let top = bar.getBoundingClientRect().top;
+    if(top < window.innerHeight - 60){
+      bar.style.width = value + "%";
+    }
+  });
+});
+
+/* ===== DARK / LIGHT TOGGLE ===== */
+const toggle = document.getElementById("modeToggle");
+toggle.onclick = ()=>{
+  document.body.classList.toggle("light");
+  toggle.innerHTML = document.body.classList.contains("light")
+    ? `<i class="fa-solid fa-sun"></i>`
+    : `<i class="fa-solid fa-moon"></i>`;
+};
+
+</script>
+
+</body>
+</html>
